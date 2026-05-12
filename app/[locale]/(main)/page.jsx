@@ -1,4 +1,5 @@
-import HeroSection from '@/components/Greeting'
+import HeroSection from '@/components/blocks/Greeting'
+import Testimonials from '@/components/blocks/Testimonials';
 
 const menudata = [
   {
@@ -44,6 +45,7 @@ export default function Home() {
       <div className='overflow-x-hidden'>
         <main className='flex flex-col pt-17.5'>
           <HeroSection menudata={menudata} />
+          <Testimonials/>
         </main>
       </div>
     </div>

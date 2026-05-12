@@ -1,6 +1,6 @@
 import { GalleryVerticalEnd } from "lucide-react"
 
-import { SignInForm } from "@/components/SignInForm"
+import { SignInForm } from "@/components/blocks/SignInForm"
 
 export default function page() {
     return (
