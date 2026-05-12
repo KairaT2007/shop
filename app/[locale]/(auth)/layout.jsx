@@ -3,7 +3,7 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { ThemeProvider } from '@/components/ThemeProvider';
-import "../globals.css";
+import "@/styles/globals.css";
 
 export const metadata = {
     title: "Create Next App",

@@ -1,3 +1,4 @@
+import { Features } from '@/components/blocks/Features';
 import HeroSection from '@/components/blocks/Greeting'
 import Testimonials from '@/components/blocks/Testimonials';
 
@@ -45,7 +46,8 @@ export default function Home() {
       <div className='overflow-x-hidden'>
         <main className='flex flex-col pt-17.5'>
           <HeroSection menudata={menudata} />
-          <Testimonials/>
+          <Features />
+          <Testimonials />
         </main>
       </div>
     </div>
