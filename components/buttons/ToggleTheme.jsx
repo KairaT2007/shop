@@ -1,10 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { useState, useEffect } from "react" // 1. Добавляем хуки
 import { Moon, Sun } from "lucide-react"
-import { useTheme } from "next-themes"
-
 import { Button } from "@/components/ui/button"
 import {
     DropdownMenu,
@@ -12,18 +9,11 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useToggleTheme } from "@/hooks/useToggleTheme"
 
 export function ToggleTheme() {
-    const { setTheme } = useTheme()
-    const [mounted, setMounted] = useState(false) // 2. Состояние монтирования
+    const { mounted, setTheme } = useToggleTheme()
 
-    // 3. Эффект сработает только в браузере
-    useEffect(() => {
-        setMounted(true)
-    }, [])
-
-    // 4. Если мы еще на сервере или в процессе гидратации — возвращаем заглушку
-    // Это предотвращает несовпадение HTML
     if (!mounted) {
         return (
             <Button variant="outline" size='icon' className='size-9.5 border-1 opacity-0'>

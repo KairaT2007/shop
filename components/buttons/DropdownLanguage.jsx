@@ -9,6 +9,8 @@ import {
     DropdownMenuRadioItem,
     DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { LanguagesIcon } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 const languages = {
     en: 'English',
@@ -16,7 +18,7 @@ const languages = {
     ua: 'Ukrainian'
 }
 
-const LanguageDropdown = ({ defaultOpen, align, trigger }) => {
+const LanguageDropdown = ({ defaultOpen, align }) => {
     const locale = useLocale()
 
     const router = useRouter()
@@ -31,11 +33,13 @@ const LanguageDropdown = ({ defaultOpen, align, trigger }) => {
 
         router.replace(segments.join('/'))
     }
-    
+
     return (
         <DropdownMenu defaultOpen={defaultOpen}>
             <DropdownMenuTrigger asChild>
-                {trigger}
+                <Button variant='outline' size='icon' className='size-9.5 border-1'>
+                    <LanguagesIcon />
+                </Button>
             </DropdownMenuTrigger>
 
             <DropdownMenuContent

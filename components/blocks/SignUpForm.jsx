@@ -1,72 +1,18 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
     Field,
-    FieldDescription,
     FieldGroup,
     FieldLabel,
     FieldSeparator,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { registerUser } from "@/lib/api"
+import { useSignUpForm } from "@/hooks/useSignUpForm" 
 
 export function SignUpForm({ className, ...props }) {
-    const router = useRouter();
-
-    const [formData, setFormData] = useState({
-        username: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-    });
-
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-
-    const handleChange = (e) => {
-        const { id, value } = e.target;
-        setFormData((prev) => ({ ...prev, [id]: value }));
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError(null);
-
-        if (formData.password !== formData.confirmPassword) {
-            setError("Passwords do not match!");
-            return;
-        }
-
-        setIsLoading(true);
-
-        try {
-            const data = await registerUser({
-                username: formData.username,
-                email: formData.email,
-                password: formData.password
-            });
-
-            // СОХРАНЕНИЕ В COOKIES
-            // Если бэкенд присылает токен в JSON ответе (например, data.access_token)
-            if (data.access_token || data.token) {
-                const token = data.access_token || data.token;
-                // Записываем куку на 24 часа
-                document.cookie = `token=${token}; path=/; max-age=86400; SameSite=Strict`;
-            }
-
-            // Перенаправляем пользователя после успешной регистрации
-            router.push("/dashboard");
-
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    const { formData, error, isLoading, handleChange, handleSubmit } = useSignUpForm();
 
     return (
         <form onSubmit={handleSubmit} className={cn("flex flex-col gap-6", className)} {...props}>
@@ -151,7 +97,7 @@ export function SignUpForm({ className, ...props }) {
                     </Button>
                 </Field>
                 <p className="text-center text-sm text-muted-foreground mt-2">
-                    Already have an account? <a href="/login" className="underline underline-offset-4">Sign in</a>
+                    Already have an account? <a href="/sign_in" className="underline underline-offset-4">Sign in</a>
                 </p>
             </FieldGroup>
         </form>
