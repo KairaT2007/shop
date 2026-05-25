@@ -1,15 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import { usePathname } from "next/navigation"
 import { loginUser } from "@/lib/api"
 
 export function useSignInForm() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
-    const pathname = usePathname();
-
-    const currentLocale = pathname.split('/')[1];
 
     const handleSignIn = async (event) => {
         event.preventDefault();
@@ -32,7 +28,7 @@ export function useSignInForm() {
             const refreshExpire = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString();
             document.cookie = `refresh_token=${data.refresh}; expires=${refreshExpire}; ${baseOptions}`;
 
-            window.location.href = `/${currentLocale}`;
+            window.location.href = `/`;
 
         } catch (err) {
             setError(err.message || "Invalid credentials");

@@ -1,15 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter, usePathname } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { registerUser } from "@/lib/api"
 
 export function useSignUpForm() {
     const router = useRouter();
-    const pathname = usePathname();
-    
-    const currentLocale = pathname.split('/')[1];
-
     const [formData, setFormData] = useState({
         username: "",
         email: "",
@@ -43,7 +39,9 @@ export function useSignUpForm() {
                 password: formData.password
             });
 
-            router.push(`/${currentLocale}/sign_in`);
+            localStorage.setItem("pending_email", formData.email);
+
+            router.push(`/check_email/activation`);
 
         } catch (err) {
             setError(err.message || "Something went wrong");

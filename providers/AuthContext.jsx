@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, useEffect } from 'react'
-import { usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { getCurrentUser } from '@/lib/api'
 
 function getCookie(name) {
@@ -17,7 +17,7 @@ const AuthContext = createContext({});
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const pathname = usePathname();
+    const router = useRouter()
 
     useEffect(() => {
         const token = getCookie('access_token');
@@ -36,8 +36,7 @@ export function AuthProvider({ children }) {
         document.cookie = "access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
         document.cookie = "refresh_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
         setUser(null);
-        const currentLocale = pathname.split('/')[1] || 'en';
-        window.location.href = `/${currentLocale}`;
+        router.push = `/`;
     };
 
     return (

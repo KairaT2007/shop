@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/sheet";
 import { Logo } from "@/components/Logo";
 import { NavMenu } from "@/components/blocks/NavMenu";
-import { MobileNavProfile } from "@/components/blocks/MobileNavProfile";
+import { NavProfileCard } from "@/components/cards/NavProfileCard";
 import { Card } from "@/components/ui/card";
 
 export const NavigationSheet = () => {
@@ -29,7 +29,7 @@ export const NavigationSheet = () => {
                     <Card className={"flex flex-col items-center px-3"}>
                         <NavMenu className="[&>div]:h-full" orientation="vertical" />
                     </Card>
-                    <MobileNavProfile />
+                    <NavProfileCard />
                 </SheetContent>
             </Sheet>
         </div>

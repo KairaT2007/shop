@@ -1,13 +1,11 @@
 "use client"
 
-import Link from 'next/link'
 import {
     UserIcon,
-    SettingsIcon,
-    CreditCardIcon,
     LogOutIcon,
     LogIn,
-    Euro
+    Euro,
+    Wallet
 } from 'lucide-react'
 
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
@@ -22,17 +20,18 @@ import {
     DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { useGetMyProfile } from '@/hooks/useGetMyProfile'
+import { Link } from '@/i18n/routing'
 
 const ProfileDropdown = () => {
-    const { user, isLoading, handleLogout, locale } = useGetMyProfile();
+    const { user, isLoading, handleLogout } = useGetMyProfile();
 
 
     if (!isLoading && !user) {
         return (
             <Button size='lg' className="hidden md:inline-flex rounded-full" asChild>
-                <Link href={`/${locale}/sign_in`}>
+                <Link href={`/sign_in`}>
+                    <LogIn className='size-4' />
                     Log in
-                    <LogIn className='size-5' />
                 </Link>
             </Button>
         );
@@ -46,7 +45,7 @@ const ProfileDropdown = () => {
                 <DropdownMenuTrigger asChild>
                     <Button variant='ghost' size='icon' className='size-9.5'>
                         <Avatar className='size-9.5 rounded-md'>
-                            <AvatarImage src='' alt={user?.username} />
+                            <AvatarImage src={user?.avatar || undefined} alt={user?.username} />
                             <AvatarFallback className="bg-primary text-primary-foreground">
                                 {isLoading ? "..." : userInitials}
                             </AvatarFallback>
@@ -57,7 +56,7 @@ const ProfileDropdown = () => {
                     <DropdownMenuLabel className='flex items-center gap-4 px-4 py-2.5 font-normal'>
                         <div className='relative'>
                             <Avatar className='size-10'>
-                                <AvatarImage src='' alt={user?.username} />
+                                <AvatarImage src={user?.avatar || undefined} alt={user?.username} />
                                 <AvatarFallback className="bg-primary text-primary-foreground">
                                     {isLoading ? "..." : userInitials}
                                 </AvatarFallback>
@@ -79,14 +78,17 @@ const ProfileDropdown = () => {
 
                     <DropdownMenuGroup>
                         <DropdownMenuItem asChild className='px-4 py-2.5 text-base cursor-pointer'>
-                            <Link href={`/${locale}/profile/${user?.uuid}`}>
+                            <Link href={`/my_profile`}>
                                 <UserIcon className='size-5 mr-2' />
                                 <span>My account</span>
                             </Link>
                         </DropdownMenuItem>
-                        <div className='px-4 py-2.5 flex items-center text-xl'>
-                            <Euro size={"20"}/>
-                            <span className="font-semibold ">{user?.balance}</span>
+                        <div className='px-4 py-2.5 flex items-center text-xl gap-3'>
+                            <Wallet size={18} />
+                            <div className='flex items-center gap-0.5'>
+                                <span className="font-semibold text-xl ">{user?.balance}</span>
+                                <Euro size={16} />
+                            </div>
                         </div>
                     </DropdownMenuGroup>
 

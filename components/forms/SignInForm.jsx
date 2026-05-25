@@ -2,12 +2,18 @@
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
+import { Field, FieldGroup, FieldLabel, FieldSeparator } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { useSignInForm } from "@/hooks/useSignInForm"
+import { Link } from "@/i18n/routing"
+import GoogleButton from "../buttons/GoogleAuthButton"
+import { EyeIcon, EyeOffIcon } from "lucide-react"
+import { useState } from "react"
 
 export function SignInForm({ className, ...props }) {
     const { isLoading, error, handleSignIn } = useSignInForm();
+    const [isVisible, setIsVisible] = useState(false)
+    const toggleVisibility = () => setIsVisible(prevState => !prevState)
 
     return (
         <form onSubmit={handleSignIn} className={cn("flex flex-col gap-6", className)} {...props}>
@@ -36,17 +42,29 @@ export function SignInForm({ className, ...props }) {
                 <Field>
                     <div className="flex items-center">
                         <FieldLabel htmlFor="password">Password</FieldLabel>
-                        <a href="#" className="ml-auto text-sm underline-offset-4 hover:underline">
+                        <Link href="/check_email/reset_password" className="ml-auto text-sm underline-offset-4 hover:underline">
                             Forgot your password?
-                        </a>
+                        </Link>
                     </div>
-                    <Input
-                        id="password"
-                        name="password"
-                        type="password"
-                        disabled={isLoading}
-                        required
-                    />
+                    <div className="relative">
+                        <Input
+                            id="password"
+                            name="password"
+                            type={isVisible ? 'text' : 'password'}
+                            disabled={isLoading}
+                            required
+                        />
+                        <Button
+                            type="button"
+                            variant='ghost'
+                            size='icon'
+                            onClick={toggleVisibility}
+                            className='text-muted-foreground focus-visible:ring-ring/50 absolute inset-y-0 right-0 rounded-l-none hover:bg-transparent'
+                        >
+                            {isVisible ? <EyeOffIcon /> : <EyeIcon />}
+                            <span className='sr-only'>{isVisible ? 'Hide password' : 'Show password'}</span>
+                        </Button>
+                    </div>
                 </Field>
 
                 <Field>
@@ -55,8 +73,14 @@ export function SignInForm({ className, ...props }) {
                     </Button>
                 </Field>
 
+                <FieldSeparator>Or continue with</FieldSeparator>
+
+                <Field>
+                    <GoogleButton />
+                </Field>
+
                 <p className="text-center text-sm text-muted-foreground mt-2">
-                    Don't have an account? <a href="/sign_up" className="underline underline-offset-4">Sign up</a>
+                    Don't have an account? <Link href={`/sign_up`} className="underline underline-offset-4">Sign up</Link>
                 </p>
             </FieldGroup>
         </form>

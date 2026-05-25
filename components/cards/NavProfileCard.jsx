@@ -1,18 +1,18 @@
 import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Euro, LogIn, LogOutIcon, UserIcon } from "lucide-react";
-import Link from "next/link";
+import { Euro, LogIn, LogOutIcon, UserIcon, Wallet } from "lucide-react";
 import { Button } from '@/components/ui/button';
 import { useGetMyProfile } from '@/hooks/useGetMyProfile';
 import { Card } from '@/components/ui/card';
+import { Link } from '@/i18n/routing';
 
-export const MobileNavProfile = () => {
+export const NavProfileCard = () => {
 
-    const { user, isLoading, handleLogout, locale } = useGetMyProfile();
+    const { user, isLoading, handleLogout } = useGetMyProfile();
 
     if (!isLoading && !user) {
         return (
-            <Link href={`/${locale}/sign_in`} className="w-full">
+            <Link href={`/sign_in`} className="w-full">
                 <Button size="lg" className="group w-full justify-center">
                     <LogIn className="size-4" />
                     Log In
@@ -27,7 +27,7 @@ export const MobileNavProfile = () => {
         <Card className={"px-3"}>
             <div className="flex items-center gap-2">
                 <Avatar className='size-10'>
-                    <AvatarImage src='' alt={user?.username} />
+                    <AvatarImage src={user?.avatar || undefined} alt={user?.username} />
                     <AvatarFallback className="bg-primary text-primary-foreground">
                         {isLoading ? "..." : userInitials}
                     </AvatarFallback>
@@ -41,12 +41,15 @@ export const MobileNavProfile = () => {
                     </span>
                 </div>
             </div>
-            <div className="flex items-center">
-                <Euro />
-                <span className="font-semibold text-2xl ">{user?.balance}</span>
+            <div className="flex items-center gap-2">
+                <Wallet />
+                <div className='flex items-center gap-1.5'>
+                    <span className="font-semibold text-2xl ">{user?.balance}</span>
+                    <Euro size={16}/>
+                </div>
             </div>
             <div className="flex flex-col gap-3">
-                <Link href={`/${locale}/profile/${user?.uuid}`} className="w-full">
+                <Link href={`/my_profile`} className="w-full">
                     <Button size="lg" variant="outline" className="group w-full justify-center">
                         <UserIcon className="size-4" />
                         My account

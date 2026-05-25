@@ -115,6 +115,12 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --success: #00c66d;
+  --success-foreground: oklch(0.07 0 0);
+  --info: #0f92f7;
+  --info-foreground: oklch(0.07 0 0);
+  --warning: #f6b900;
+  --warning-foreground: #010101;
 }
 
 @layer base {

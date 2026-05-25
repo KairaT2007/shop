@@ -6,7 +6,8 @@ import "@/styles/globals.css";
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { AuthProvider } from '@/providers/AuthContext';
 import { Inter } from 'next/font/google'
-
+import { cn } from "@/lib/utils"
+import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern"
 
 export const metadata = {
     title: "Create Next App",
@@ -14,8 +15,8 @@ export const metadata = {
 };
 
 const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-sans', // Имя должно совпадать!
+    subsets: ['latin'],
+    variable: '--font-sans',
 })
 
 export default async function RootLocaleLayout({ children, params }) {
@@ -38,6 +39,16 @@ export default async function RootLocaleLayout({ children, params }) {
                         disableTransitionOnChange
                     >
                         <AuthProvider>
+                            <AnimatedGridPattern
+                                numSquares={40}
+                                maxOpacity={0.1}
+                                duration={3}
+                                repeatDelay={1}
+                                className={cn(
+                                    "[mask-image:radial-gradient(1000px_circle_at_center,white,transparent)]",
+                                    "fixed inset-0 z-[-1] h-full w-full skew-y-12"
+                                )}
+                            />
                             {children}
                         </AuthProvider>
                     </ThemeProvider>
