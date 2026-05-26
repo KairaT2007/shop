@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 import { registerUser } from "@/lib/api"
 
 export function useSignUpForm() {
@@ -26,7 +27,15 @@ export function useSignUpForm() {
         setError(null);
 
         if (formData.password !== formData.confirmPassword) {
-            setError("Passwords do not match!");
+            const errMsg = "Пароли не совпадают!";
+            setError(errMsg);
+            toast.error(errMsg, {
+                style: {
+                    '--normal-bg': 'color-mix(in oklab, light-dark(var(--color-red-600), var(--color-red-400)) 10%, var(--background))',
+                    '--normal-text': 'light-dark(var(--color-red-600), var(--color-red-400))',
+                    '--normal-border': 'light-dark(var(--color-red-600), var(--color-red-400))'
+                }
+            });
             return;
         }
 
@@ -41,10 +50,27 @@ export function useSignUpForm() {
 
             localStorage.setItem("pending_email", formData.email);
 
-            router.push(`/check_email/activation`);
+            toast.success('Регистрация успешна! На вашу почту отправлена ссылка для активации аккаунта.', {
+                duration: 5000,
+                style: {
+                    '--normal-bg': 'color-mix(in oklab, light-dark(var(--color-green-600), var(--color-green-400)) 10%, var(--background))',
+                    '--normal-text': 'light-dark(var(--color-green-600), var(--color-green-400))',
+                    '--normal-border': 'light-dark(var(--color-green-600), var(--color-green-400))'
+                }
+            });
+
+            window.location.href = '/check_email/activation';
 
         } catch (err) {
-            setError(err.message || "Something went wrong");
+            const errMsg = err.message || "Что-то пошло не так";
+            setError(errMsg);
+            toast.error(errMsg, {
+                style: {
+                    '--normal-bg': 'color-mix(in oklab, light-dark(var(--color-red-600), var(--color-red-400)) 10%, var(--background))',
+                    '--normal-text': 'light-dark(var(--color-red-600), var(--color-red-400))',
+                    '--normal-border': 'light-dark(var(--color-red-600), var(--color-red-400))'
+                }
+            });
         } finally {
             setIsLoading(false);
         }

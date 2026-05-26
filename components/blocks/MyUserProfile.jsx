@@ -3,11 +3,12 @@
 import { BalanceCard } from "@/components/cards/BalanceCard"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { Handshake, Star, TrendingUp, CalendarDays } from "lucide-react"
+import { Handshake, Star, TrendingUp, CalendarDays, Lock } from "lucide-react" // Добавил иконку Lock для красоты
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { useGetMyProfile } from "@/hooks/useGetMyProfile"
 import StatCard from "../cards/StatCard"
+import { Link } from "@/i18n/routing"
 
 const userData = {
     avatarUrl: "/signin.jpg",
@@ -25,14 +26,36 @@ const userData = {
 }
 
 export default function MyUserProfile() {
-
-    const { user, isLoading } = useGetMyProfile();
+    const { user, isLoading, error } = useGetMyProfile();
     const userInitials = user?.username?.substring(0, 1).toUpperCase() || "??";
+
+    if (error) {
+        return (
+            <Card className="border-border/50 mt-10 bg-background/50 backdrop-blur-md">
+                <CardContent className="flex flex-col items-center justify-center py-20 text-center">
+                    <div className="bg-muted p-4 rounded-full mb-4">
+                        <Lock className="size-10 text-muted-foreground" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-foreground mb-2">Доступ закрыт</h2>
+                    <p className="text-muted-foreground mb-6 max-w-md text-pretty">
+                        Пожалуйста, войдите в свой аккаунт, чтобы просматривать баланс и редактировать личные данные.
+                    </p>
+                    <Link
+                        href="/sign_in"
+                        className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
+                    >
+                        Войти в аккаунт
+                    </Link>
+                </CardContent>
+            </Card>
+        );
+    }
+
 
     return (
         <>
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-                <Card className="border-border/50 lg:col-span-2">
+                <Card className="border-border/50 lg:col-span-2 bg-background/50 backdrop-blur-md">
                     <CardContent className="pt-6">
                         <div className="flex flex-col items-center gap-6 md:flex-row md:items-start">
                             <Avatar className="size-28 border-4 border-foreground/10 ring-2 ring-foreground/5">
@@ -47,17 +70,18 @@ export default function MyUserProfile() {
                                     <h1 className="text-2xl font-bold tracking-tight text-foreground">
                                         {isLoading ? "Username" : user?.username}
                                     </h1>
-                                    <Badge
-                                        variant="secondary"
-                                        className="border-border bg-secondary text-secondary-foreground"
-                                    >
-                                        {isLoading ? "example@email.com" : user?.email}
-                                    </Badge>
+                                    {!isLoading && user?.email && (
+                                        <Badge
+                                            variant="secondary"
+                                            className="border-border bg-secondary text-secondary-foreground"
+                                        >
+                                            {user.email}
+                                        </Badge>
+                                    )}
                                 </div>
 
                                 <p className="max-w-3xl text-pretty text-base leading-relaxed text-muted-foreground">
                                     {isLoading ? "Description" : user?.description}
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas at explicabo fuga reiciendis molestias ducimus distinctio culpa, temporibus sunt praesentium reprehenderit cumque magni soluta sit labore. Sit, ad aliquid. Id.
                                 </p>
 
                                 <div className="flex items-center gap-1.5 text-sm text-muted-foreground">

@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input"
 import { useSignUpForm } from "@/hooks/useSignUpForm"
 import { Link } from "@/i18n/routing"
 import GoogleButton from "../buttons/GoogleAuthButton"
-import { CheckIcon, XIcon, EyeIcon, EyeOffIcon } from "lucide-react"
+import { CheckIcon, XIcon, EyeIcon, EyeOffIcon, Home } from "lucide-react"
 
 const requirements = [
     { regex: /.{12,}/, text: 'At least 12 characters' },
@@ -28,7 +28,6 @@ export function SignUpForm({ className, ...props }) {
 
     const toggleVisibility = () => setIsVisible(prevState => !prevState);
 
-    // Validate the password from formData
     const strength = requirements.map(req => ({
         met: req.regex.test(formData.password || ''),
         text: req.text
@@ -43,7 +42,7 @@ export function SignUpForm({ className, ...props }) {
     const isButtonDisabled = isLoading || !isAllRequirementsMet || !isPasswordsMatch;
 
     const getColor = (score) => {
-        if (score === 0) return 'bg-muted' // Заменил на bg-muted для лучшей видимости пустых баров
+        if (score === 0) return 'bg-muted'
         if (score === 1) return 'bg-destructive'
         if (score === 2) return 'bg-orange-500'
         if (score === 3) return 'bg-yellow-400'
@@ -196,6 +195,16 @@ export function SignUpForm({ className, ...props }) {
                 <Field>
                     <GoogleButton />
                 </Field>
+
+                <Field>
+                    <Button variant="outline" asChild>
+                        <Link href={'/'}>
+                            <Home />
+                            Back to Home
+                        </Link>
+                    </Button>
+                </Field>
+
                 <p className="text-center text-sm text-muted-foreground mt-2">
                     Already have an account? <Link href="/sign_in" className="underline underline-offset-4">Sign in</Link>
                 </p>

@@ -2,11 +2,12 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { Handshake, Star, TrendingUp, CalendarDays } from "lucide-react"
+import { Handshake, Star, TrendingUp, CalendarDays, UserX } from "lucide-react" // Добавил иконку UserX
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { useGetMyProfile } from "@/hooks/useGetMyProfile"
+import { useGetProfile } from "@/hooks/useGetProfile"
 import StatCard from "../cards/StatCard"
+import { Link } from "@/i18n/routing"
 
 const userData = {
     avatarUrl: "/signin.jpg",
@@ -24,9 +25,31 @@ const userData = {
 }
 
 export default function UserProfile() {
+    const { user, isLoading, error } = useGetProfile();
 
-    const { user, isLoading } = useGetMyProfile();
     const userInitials = user?.username?.substring(0, 1).toUpperCase() || "??";
+
+    if (error) {
+        return (
+            <Card className="border-border/50 mt-10">
+                <CardContent className="flex flex-col items-center justify-center py-20 text-center">
+                    <div className="bg-muted p-4 rounded-full mb-4">
+                        <UserX className="size-10 text-muted-foreground" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-foreground mb-2">Пользователь не найден</h2>
+                    <p className="text-muted-foreground mb-6 max-w-md text-pretty">
+                        К сожалению, такого пользователя не существует или его профиль был удален.
+                    </p>
+                    <Link 
+                        href="/" 
+                        className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
+                    >
+                        Вернуться на главную
+                    </Link>
+                </CardContent>
+            </Card>
+        );
+    }
 
     return (
         <>
@@ -44,19 +67,20 @@ export default function UserProfile() {
                             <div className="flex flex-1 flex-col items-center gap-3 text-center md:items-start md:text-left">
                                 <div className="flex flex-col items-center gap-2 md:flex-row">
                                     <h1 className="text-2xl font-bold tracking-tight text-foreground">
-                                        {isLoading ? "Username" : user?.username}
+                                        {isLoading ? "Загрузка..." : user?.username}
                                     </h1>
-                                    <Badge
-                                        variant="secondary"
-                                        className="border-border bg-secondary text-secondary-foreground"
-                                    >
-                                        {isLoading ? "example@email.com" : user?.email}
-                                    </Badge>
+                                    {!isLoading && user?.email && (
+                                        <Badge
+                                            variant="secondary"
+                                            className="border-border bg-secondary text-secondary-foreground"
+                                        >
+                                            {user?.email}
+                                        </Badge>
+                                    )}
                                 </div>
 
                                 <p className="text-pretty text-base leading-relaxed text-muted-foreground">
-                                    {isLoading ? "Description" : user?.description}
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas at explicabo fuga reiciendis molestias ducimus distinctio culpa, temporibus sunt praesentium reprehenderit cumque magni soluta sit labore. Sit, ad aliquid. Id.
+                                    {isLoading ? "Загрузка описания..." : (user?.description || "Описания нет.")}
                                 </p>
 
                                 <div className="flex items-center gap-1.5 text-sm text-muted-foreground">

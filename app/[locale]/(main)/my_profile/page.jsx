@@ -1,11 +1,9 @@
 "use client"
 
-import AccountSettings from '@/components/blocks/AccountSettings'
+import AccountSettingsForm from '@/components/forms/AccountSettingsForm'
 import ProfileTestimonials from '@/components/blocks/ProfileTestimonials'
 import MyUserProfile from '@/components/blocks/MyUserProfile'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-
-import { useGetMyProfile } from '@/hooks/useGetMyProfile'
 
 const tabs = [
     { name: 'Profile', value: 'profile' },
@@ -14,19 +12,6 @@ const tabs = [
 ]
 
 const page = () => {
-    const { user, isLoading } = useGetMyProfile();
-
-    if (isLoading) {
-        return (
-            <div className='min-h-screen pt-30 flex items-center justify-center'>
-                Загрузка...
-            </div>
-        );
-    }
-
-    if (!user) {
-        window.location.href = `/sign_in`;
-    }
 
     return (
         <Tabs defaultValue='profile' className='gap-4 w-full pt-30 mx-auto min-h-screen max-w-7xl px-4 sm:px-6 lg:px-8'>
@@ -49,7 +34,7 @@ const page = () => {
                 </TabsContent>
 
                 <TabsContent value="settings">
-                    <AccountSettings />
+                    <AccountSettingsForm />
                 </TabsContent>
 
                 <TabsContent value="orders">

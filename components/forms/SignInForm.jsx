@@ -7,11 +7,11 @@ import { Input } from "@/components/ui/input"
 import { useSignInForm } from "@/hooks/useSignInForm"
 import { Link } from "@/i18n/routing"
 import GoogleButton from "../buttons/GoogleAuthButton"
-import { EyeIcon, EyeOffIcon } from "lucide-react"
+import { EyeIcon, EyeOffIcon, Home } from "lucide-react"
 import { useState } from "react"
 
 export function SignInForm({ className, ...props }) {
-    const { isLoading, error, handleSignIn } = useSignInForm();
+    const { isLoading, handleSignIn } = useSignInForm();
     const [isVisible, setIsVisible] = useState(false)
     const toggleVisibility = () => setIsVisible(prevState => !prevState)
 
@@ -20,11 +20,6 @@ export function SignInForm({ className, ...props }) {
             <FieldGroup>
                 <div className="flex flex-col items-center gap-1 text-center">
                     <h1 className="text-2xl font-bold">Login to your account</h1>
-                    {error && (
-                        <p className="text-sm text-destructive bg-destructive/10 p-2 rounded-md w-full">
-                            {error}
-                        </p>
-                    )}
                 </div>
 
                 <Field>
@@ -77,6 +72,15 @@ export function SignInForm({ className, ...props }) {
 
                 <Field>
                     <GoogleButton />
+                </Field>
+
+                <Field>
+                    <Button variant="outline" asChild>
+                        <Link href={'/'}>
+                            <Home />
+                            Back to Home
+                        </Link>
+                    </Button>
                 </Field>
 
                 <p className="text-center text-sm text-muted-foreground mt-2">

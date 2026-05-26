@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card"
 
 export default function StatCard({ icon, label, value, subtext, iconBgClass }) {
     return (
-        <Card className="group relative overflow-hidden border-border/50 p-5 transition-colors hover:border-foreground/20">
+        <Card className="group relative overflow-hidden border-border/50 p-5 transition-colors hover:border-foreground/20 bg-background/50 backdrop-blur-md">
             <div className="flex items-start justify-between">
                 <div className="flex flex-col gap-1">
                     <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">

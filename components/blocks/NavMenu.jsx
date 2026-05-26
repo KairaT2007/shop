@@ -14,17 +14,17 @@ export const NavMenu = (props) => (
         <NavigationMenuList className="space-x-0 data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-center data-[orientation=vertical]:justify-start">
             <NavigationMenuItem>
                 <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                    <Link href="#">Home</Link>
+                    <Link href="/">Home</Link>
                 </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
                 <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                    <Link href="#">Blog</Link>
+                    <Link href="/games">Games</Link>
                 </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
                 <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                    <Link href="#">About</Link>
+                    <Link href="/about_us">About Us</Link>
                 </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>

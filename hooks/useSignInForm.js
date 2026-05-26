@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { toast } from "sonner"
 import { loginUser } from "@/lib/api"
 
 export function useSignInForm() {
@@ -28,10 +29,27 @@ export function useSignInForm() {
             const refreshExpire = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString();
             document.cookie = `refresh_token=${data.refresh}; expires=${refreshExpire}; ${baseOptions}`;
 
+            toast.success("Вход выполнен успешно!", {
+                style: {
+                    '--normal-bg': 'color-mix(in oklab, light-dark(var(--color-green-600), var(--color-green-400)) 10%, var(--background))',
+                    '--normal-text': 'light-dark(var(--color-green-600), var(--color-green-400))',
+                    '--normal-border': 'light-dark(var(--color-green-600), var(--color-green-400))'
+                }
+            });
+
             window.location.href = `/`;
 
         } catch (err) {
-            setError(err.message || "Invalid credentials");
+            const errMsg = err.message || "Неверные учетные данные";
+            setError(errMsg);
+            
+            toast.error(errMsg, {
+                style: {
+                    '--normal-bg': 'color-mix(in oklab, light-dark(var(--color-red-600), var(--color-red-400)) 10%, var(--background))',
+                    '--normal-text': 'light-dark(var(--color-red-600), var(--color-red-400))',
+                    '--normal-border': 'light-dark(var(--color-red-600), var(--color-red-400))'
+                }
+            });
         } finally {
             setIsLoading(false);
         }

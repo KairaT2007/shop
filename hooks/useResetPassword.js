@@ -1,19 +1,19 @@
 "use client"
 
 import { useState, useMemo } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
+import { toast } from 'sonner'
 import { resetPassword } from '@/lib/api'
 
 const requirements = [
-    { regex: /.{12,}/, text: 'At least 12 characters' },
-    { regex: /[a-z]/, text: 'At least 1 lowercase letter' },
-    { regex: /[A-Z]/, text: 'At least 1 uppercase letter' },
-    { regex: /[0-9]/, text: 'At least 1 number' }
+    { regex: /.{12,}/, text: 'Минимум 12 символов' },
+    { regex: /[a-z]/, text: 'Минимум 1 строчная буква' },
+    { regex: /[A-Z]/, text: 'Минимум 1 заглавная буква' },
+    { regex: /[0-9]/, text: 'Минимум 1 цифра' }
 ]
 
 export function useResetPassword() {
     const { uid, token } = useParams()
-    const router = useRouter()
 
     const [isVisible, setIsVisible] = useState(false)
     const [newPassword, setNewPassword] = useState('')
@@ -47,12 +47,30 @@ export function useResetPassword() {
             await resetPassword(uid, token, newPassword, confirmPassword)
             setStatus('success')
 
+            toast.success("Пароль успешно изменен!", {
+                style: {
+                    '--normal-bg': 'color-mix(in oklab, light-dark(var(--color-green-600), var(--color-green-400)) 10%, var(--background))',
+                    '--normal-text': 'light-dark(var(--color-green-600), var(--color-green-400))',
+                    '--normal-border': 'light-dark(var(--color-green-600), var(--color-green-400))'
+                }
+            })
+
+            // Ждем 2 секунды, чтобы пользователь увидел зеленый тост, затем жестко перенаправляем
             setTimeout(() => {
-                router.push('/sign_in')
+                window.location.href = '/sign_in'
             }, 2000)
 
         } catch (error) {
             setStatus('error')
+            const errMsg = error.message || "Не удалось сбросить пароль"
+            
+            toast.error(errMsg, {
+                style: {
+                    '--normal-bg': 'color-mix(in oklab, light-dark(var(--color-red-600), var(--color-red-400)) 10%, var(--background))',
+                    '--normal-text': 'light-dark(var(--color-red-600), var(--color-red-400))',
+                    '--normal-border': 'light-dark(var(--color-red-600), var(--color-red-400))'
+                }
+            })
         } finally {
             setLoading(false)
         }

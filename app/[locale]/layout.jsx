@@ -8,6 +8,7 @@ import { AuthProvider } from '@/providers/AuthContext';
 import { Inter } from 'next/font/google'
 import { cn } from "@/lib/utils"
 import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern"
+import { Toaster } from "@/components/ui/sonner"
 
 export const metadata = {
     title: "Create Next App",
@@ -50,6 +51,7 @@ export default async function RootLocaleLayout({ children, params }) {
                                 )}
                             />
                             {children}
+                            <Toaster />
                         </AuthProvider>
                     </ThemeProvider>
                 </NextIntlClientProvider>

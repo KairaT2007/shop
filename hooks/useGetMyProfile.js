@@ -4,5 +4,6 @@ import { useAuth } from '@/providers/AuthContext'
 
 export function useGetMyProfile() {
     const { user, isLoading, handleLogout } = useAuth();
-    return { user, isLoading, handleLogout };
+    const error = (!isLoading && !user) ? "Не авторизован" : null;
+    return { user, isLoading, handleLogout, error };
 }

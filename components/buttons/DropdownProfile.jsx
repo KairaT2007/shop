@@ -52,7 +52,7 @@ const ProfileDropdown = () => {
                         </Avatar>
                     </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className='w-80' align="end">
+                <DropdownMenuContent className='w-80 bg-background/90 backdrop-blur-lg' align="end">
                     <DropdownMenuLabel className='flex items-center gap-4 px-4 py-2.5 font-normal'>
                         <div className='relative'>
                             <Avatar className='size-10'>

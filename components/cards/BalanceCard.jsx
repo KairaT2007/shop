@@ -16,7 +16,7 @@ export function BalanceCard({ currency = "EUR" }) {
     }
 
     return (
-        <Card className="h-full border-border/50">
+        <Card className="h-full border-border/50 bg-background/50 backdrop-blur-md">
             <CardContent className="flex h-full flex-col gap-4 p-8">
                 <div className="flex flex-col gap-1 text-center">
                     <span className="text-sm font-medium uppercase tracking-wider text-muted-foreground">

@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { toast } from "sonner"
 import { resendActivation } from "@/lib/api"
 
 export function useResendEmailActivation() {
@@ -14,16 +15,43 @@ export function useResendEmailActivation() {
     }, [])
 
     const handleResend = async () => {
-        if (!email) return
+        if (!email) {
+            toast.error("Email не найден. Пожалуйста, начните регистрацию заново.", {
+                style: {
+                    '--normal-bg': 'color-mix(in oklab, light-dark(var(--color-red-600), var(--color-red-400)) 10%, var(--background))',
+                    '--normal-text': 'light-dark(var(--color-red-600), var(--color-red-400))',
+                    '--normal-border': 'light-dark(var(--color-red-600), var(--color-red-400))'
+                }
+            });
+            return;
+        }
 
         setLoading(true)
         setMessage("")
 
         try {
             await resendActivation(email)
-            setMessage("Email sent again!")
+            const successMsg = "Письмо отправлено повторно!"
+            setMessage(successMsg)
+            
+            toast.success(successMsg, {
+                style: {
+                    '--normal-bg': 'color-mix(in oklab, light-dark(var(--color-green-600), var(--color-green-400)) 10%, var(--background))',
+                    '--normal-text': 'light-dark(var(--color-green-600), var(--color-green-400))',
+                    '--normal-border': 'light-dark(var(--color-green-600), var(--color-green-400))'
+                }
+            })
         } catch (err) {
-            setMessage(err.message || "Failed to resend email")
+            const errMsg = err.message || "Не удалось отправить письмо"
+            setMessage(errMsg)
+            
+            toast.error(errMsg, {
+                style: {
+                    '--normal-bg': 'color-mix(in oklab, light-dark(var(--color-red-600), var(--color-red-400)) 10%, var(--background))',
+                    '--normal-text': 'light-dark(var(--color-red-600), var(--color-red-400))',
+                    '--normal-border': 'light-dark(var(--color-red-600), var(--color-red-400))'
+                }
+            })
         } finally {
             setLoading(false)
         }
@@ -33,7 +61,7 @@ export function useResendEmailActivation() {
     if (loading) {
         status = "loading"
     } else if (message) {
-        status = message.includes("Failed") ? "error" : "success"
+        status = message.includes("Не удалось") ? "error" : "success"
     }
 
     return {

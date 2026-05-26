@@ -12,7 +12,7 @@ import { NavMenu } from "@/components/blocks/NavMenu";
 import { NavProfileCard } from "@/components/cards/NavProfileCard";
 import { Card } from "@/components/ui/card";
 
-export const NavigationSheet = () => {
+export const NavSheet = () => {
     return (
         <div className="md:hidden">
             <Sheet>
