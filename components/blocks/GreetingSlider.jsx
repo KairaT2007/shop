@@ -40,7 +40,7 @@ const GreetingSlider = () => {
               <Button
                 asChild
                 size='lg'
-                className='group relative w-fit overflow-hidden rounded-full text-base before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.5)_50%,transparent_75%,transparent_100%)] before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:transition-[background-position_0s_ease] before:duration-1000 hover:before:bg-[position:-100%_0,0_0] has-[>svg]:px-6 dark:before:bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.2)_50%,transparent_75%,transparent_100%)]'>
+                className='group relative w-fit overflow-hidden rounded-full text-base before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.5)_50%,transparent_75%,transparent_100%)] before:bg-size-[250%_250%,100%_100%] before:bg-position-[200%_0,0_0] before:bg-no-repeat before:transition-[background-position_0s_ease] before:duration-1000 hover:before:bg-position-[-100%_0,0_0] has-[>svg]:px-6 dark:before:bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.2)_50%,transparent_75%,transparent_100%)]'>
                 <a href='#'>
                   Order now
                   <ArrowRightIcon className='transition-transform duration-200 group-hover:translate-x-0.5' />
@@ -76,8 +76,8 @@ const GreetingSlider = () => {
             className='relative w-full max-lg:order-2 lg:col-span-3 '
             setApi={setThumbApi}
             opts={{ loop: true }}>
-            <div className='from-background pointer-events-none absolute inset-y-0 left-0 z-1 w-25 bg-gradient-to-r via-85% to-transparent' />
-            <div className='from-background pointer-events-none absolute inset-y-0 right-0 z-1 w-25 bg-gradient-to-l via-85% to-transparent' />
+            <div className='from-background pointer-events-none absolute inset-y-0 left-0 z-1 w-25 bg-linear-to-r via-85% to-transparent' />
+            <div className='from-background pointer-events-none absolute inset-y-0 right-0 z-1 w-25 bg-linear-to-l via-85% to-transparent' />
             <CarouselContent className='my-1 flex'>
               {menudata.map((item, index) => (
                 <CarouselItem
@@ -118,7 +118,7 @@ const GreetingSlider = () => {
               {menudata.map(item => (
                 <CarouselItem key={item.id} className='flex h-full min-h-14 w-full justify-center gap-4 px-6 lg:items-center'>
                   <img src={item.userAvatar} alt={item.imgAlt} className='border-background size-10 rounded-full border-4 drop-shadow-lg' />
-                  <Separator orientation='vertical' className='bg-primary hidden !h-6 !w-0.5 !rounded-full sm:block' />
+                  <Separator orientation='vertical' className='bg-primary hidden h-6! w-0.5! rounded-full! sm:block' />
                   <p className='text-card-foreground'>{item.userComment}</p>
                 </CarouselItem>
               ))}

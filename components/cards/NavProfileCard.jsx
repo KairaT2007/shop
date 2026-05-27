@@ -36,7 +36,7 @@ export const NavProfileCard = () => {
                     <span className='text-foreground text-lg font-semibold'>
                         {user?.username}
                     </span>
-                    <span className='text-muted-foreground text-sm truncate max-w-[180px]'>
+                    <span className='text-muted-foreground text-sm truncate max-w-45'>
                         {user?.email}
                     </span>
                 </div>

@@ -37,7 +37,7 @@ const LanguageDropdown = ({ defaultOpen, align }) => {
     return (
         <DropdownMenu defaultOpen={defaultOpen}>
             <DropdownMenuTrigger asChild>
-                <Button variant='outline' size='icon' className='size-9.5 border-1'>
+                <Button variant='outline' size='icon' className='size-9.5 border'>
                     <LanguagesIcon />
                 </Button>
             </DropdownMenuTrigger>

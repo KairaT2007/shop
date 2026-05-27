@@ -20,7 +20,7 @@ export const NavSheet = () => {
                     <SheetTitle>Navigation Menu</SheetTitle>
                 </VisuallyHidden>
                 <SheetTrigger asChild>
-                    <Button className="rounded-full size-9.5 border-1" size="icon" variant="outline">
+                    <Button className="rounded-full size-9.5 border" size="icon" variant="outline">
                         <Menu />
                     </Button>
                 </SheetTrigger>

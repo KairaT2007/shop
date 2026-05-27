@@ -46,7 +46,7 @@ export default async function RootLocaleLayout({ children, params }) {
                                 duration={3}
                                 repeatDelay={1}
                                 className={cn(
-                                    "[mask-image:radial-gradient(1000px_circle_at_center,white,transparent)]",
+                                    "mask-[radial-gradient(1000px_circle_at_center,white,transparent)]",
                                     "fixed inset-0 z-[-1] h-full w-full skew-y-12"
                                 )}
                             />
