@@ -2,7 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { Handshake, Star, TrendingUp, CalendarDays, UserX } from "lucide-react" // Добавил иконку UserX
+import { Handshake, Star, TrendingUp, CalendarDays, UserX } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { useGetProfile } from "@/hooks/useGetProfile"
@@ -69,14 +69,6 @@ export default function UserProfile() {
                                     <h1 className="text-2xl font-bold tracking-tight text-foreground">
                                         {isLoading ? "Загрузка..." : user?.username}
                                     </h1>
-                                    {!isLoading && user?.email && (
-                                        <Badge
-                                            variant="secondary"
-                                            className="border-border bg-secondary text-secondary-foreground"
-                                        >
-                                            {user?.email}
-                                        </Badge>
-                                    )}
                                 </div>
 
                                 <p className="text-pretty text-base leading-relaxed text-muted-foreground">

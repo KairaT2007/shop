@@ -1,6 +1,6 @@
 "use client"
 
-import { ResendEmailActivationCard } from "@/components/cards/ResendEmailActivationCard" // Проверьте путь
+import { ResendEmailActivationCard } from "@/components/cards/ResendEmailActivationCard"
 
 export default function page() {
     return (

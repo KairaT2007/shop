@@ -1,6 +1,6 @@
 "use client"
 
-import { ResetPasswordCard } from '@/components/cards/ResetPasswordCard' // Проверьте путь импорта
+import { ResetPasswordCard } from '@/components/cards/ResetPasswordCard'
 
 export default function page() {
   

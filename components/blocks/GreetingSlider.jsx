@@ -55,7 +55,6 @@ const GreetingSlider = () => {
             </div>
           </div>
 
-          {/* Главная карусель */}
           <Carousel
             className='w-full lg:col-span-2'
             setApi={setMainApi}

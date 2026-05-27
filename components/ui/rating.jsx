@@ -105,7 +105,6 @@ function RatingItem({
       onValueHover(0)
       onValueChange?.(newPoint === value ? 0 : newPoint)
 
-      // Prevent focus on click by blurring the element
       event.currentTarget.blur()
     },
     [isInteractive, value, onValueChange, onValueHover, getRatingPoint]
@@ -151,7 +150,7 @@ function RatingItem({
   )
 }
 
-// Rating Component
+
 function Rating({
   value: controlledValue,
   defaultValue = 0,
@@ -226,7 +225,6 @@ function Rating({
         case 'Enter':
           event.preventDefault()
 
-          // If no rating is set, set to first step, otherwise clear rating
           if (value === 0) {
             handleValueChange(precision)
           } else {
@@ -252,7 +250,6 @@ function Rating({
   )
 
   const handleMouseDown = React.useCallback((event) => {
-    // Prevent focus on mouse click
     event.preventDefault()
   }, [])
 

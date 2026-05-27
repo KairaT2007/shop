@@ -1,6 +1,6 @@
 "use client"
 
-import { ActivationAccountCard } from "@/components/cards/ActivationAccountCard" // Укажите правильный путь
+import { ActivationAccountCard } from "@/components/cards/ActivationAccountCard"
 
 export default function page() {
     return (

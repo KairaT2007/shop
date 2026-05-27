@@ -95,7 +95,6 @@ export function SignUpForm({ className, ...props }) {
                     />
                 </Field>
 
-                {/* Password Field */}
                 <Field className="space-y-2">
                     <FieldLabel htmlFor="password">Password</FieldLabel>
                     <div className="relative">
@@ -122,7 +121,6 @@ export function SignUpForm({ className, ...props }) {
                     </div>
                 </Field>
 
-                {/* Confirm Password Field */}
                 <Field className="space-y-2">
                     <FieldLabel htmlFor="confirmPassword">Confirm Password</FieldLabel>
                     <div className="relative">
@@ -149,9 +147,7 @@ export function SignUpForm({ className, ...props }) {
                     </div>
                 </Field>
 
-                {/* Блок с требованиями перенесен сюда, после всех полей */}
                 <div className="flex flex-col gap-3 py-1">
-                    {/* Strength Bars - исправлены на div и увеличены по высоте */}
                     <div className="flex h-1 w-full gap-1">
                         {Array.from({ length: 4 }).map((_, index) => (
                             <div
@@ -164,7 +160,6 @@ export function SignUpForm({ className, ...props }) {
                         ))}
                     </div>
 
-                    {/* Requirements Checklist */}
                     <div className="space-y-2">
                         <p className="text-foreground text-sm font-medium">{getText(strengthScore)}. Must contain :</p>
                         <ul className="space-y-1.5">

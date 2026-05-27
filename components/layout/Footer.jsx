@@ -36,7 +36,6 @@ const Footer = () => {
         <footer className="border-t bg-background/50 backdrop-blur-xs">
             <div className="mx-auto max-w-(--breakpoint-xl)">
                 <div className="flex flex-col items-center justify-start py-12">
-                    {/* Logo */}
                     <svg
                         fill="none"
                         height="32"
@@ -70,7 +69,6 @@ const Footer = () => {
                 </div>
                 <Separator />
                 <div className="flex flex-col-reverse items-center justify-between gap-x-2 gap-y-5 px-6 py-8 sm:flex-row xl:px-0">
-                    {/* Copyright */}
                     <span className="text-muted-foreground">
                         &copy; {new Date().getFullYear()}{" "}
                         <Link href="/" target="_blank">

@@ -3,7 +3,7 @@
 import { BalanceCard } from "@/components/cards/BalanceCard"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { Handshake, Star, TrendingUp, CalendarDays, Lock } from "lucide-react" // Добавил иконку Lock для красоты
+import { Handshake, Star, TrendingUp, CalendarDays, Lock } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { useGetMyProfile } from "@/hooks/useGetMyProfile"
@@ -28,6 +28,7 @@ const userData = {
 export default function MyUserProfile() {
     const { user, isLoading, error } = useGetMyProfile();
     const userInitials = user?.username?.substring(0, 1).toUpperCase() || "??";
+    console.log(user)
 
     if (error) {
         return (

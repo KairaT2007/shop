@@ -55,7 +55,6 @@ export function useResetPassword() {
                 }
             })
 
-            // Ждем 2 секунды, чтобы пользователь увидел зеленый тост, затем жестко перенаправляем
             setTimeout(() => {
                 window.location.href = '/sign_in'
             }, 2000)
